@@ -14,7 +14,7 @@ const Header = () => {
   }
 
   return (
-    <header className="navbar">
+    <header className={`navbar ${location.pathname !== '/' ? 'nav-c' : ''}`}>
       <div className="navbar-content">
         <Link to="/" className="logo" onClick={closeMenu}>
          <img src={logo} alt="logo" width="50px"/>
