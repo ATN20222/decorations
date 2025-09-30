@@ -151,7 +151,7 @@ a:hover {
 
 /* Container */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
 }
@@ -272,7 +272,12 @@ a:hover {
   max-width: 600px;
   margin: 0 auto;
 }
-
+@media (max-width:1500px) {
+  .container{
+    max-width: 1200px;
+  }
+ 
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {

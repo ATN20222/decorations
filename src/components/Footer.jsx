@@ -1,18 +1,42 @@
 import { Link } from 'react-router-dom'
-
+import logo from '../assets/Logo-Decorations-White.svg'
+import locationIcon from '../assets/icons/location.svg'
+import phoneIcon from '../assets/icons/phone.svg'
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer" role="contentinfo">
       <div className="footer-content">
-        <div className="footer-links">
-          <Link to="/" className="footer-link">الرئيسية</Link>
-          <Link to="/about" className="footer-link">من نحن</Link>
-          <Link to="/contact" className="footer-link">اتصل بنا</Link>
+        {/* Top: Brand + description */}
+        <div className="footer-top">
+          <div className="footer-brand">
+            <Link to="/" className="footer-logo" aria-label="العودة للصفحة الرئيسية">
+              <img src={logo} alt="شركة الديكورات المتميزة" width="100px" />
+            </Link>
+          </div>
+
+          {/* Quick Links */}
+          <nav className="footer-links-group" aria-label="روابط مهمة">
+            <div className="footer-links">
+              <Link to="/" className="footer-link">الرئيسية</Link>
+              <Link to="/about" className="footer-link">من نحن</Link>
+              <Link to="/contact" className="footer-link">اتصل بنا</Link>
+            </div>
+          </nav>
+
+          {/* Contact */}
+          <div className="footer-contact">
+            {/* <h4 className="footer-heading">تواصل</h4> */}
+            <ul className="footer-contact-list" dir="rtl">
+              <li className="footer-contact-item"><img src={locationIcon} alt="location" width="30px" /> الرياض، المملكة العربية السعودية</li>
+              <li className="footer-contact-item"><img src={phoneIcon} alt="phone" width="30px" /> الهاتف: 55792622</li>
+              {/* <li className="footer-contact-item">البريد: decorations.arab@gmail.com</li> */}
+            </ul>
+          </div>
         </div>
-        
+
+        {/* Bottom: legal */}
         <div className="footer-bottom">
-          <p>&copy; 2024 شركة الديكورات المتميزة. جميع الحقوق محفوظة.</p>
-          <p>نحن متخصصون في تقديم أفضل خدمات الديكورات والتصميم الداخلي</p>
+          <p>&copy; {new Date().getFullYear()} شركة الديكورات المتميزة. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
