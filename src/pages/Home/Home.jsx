@@ -11,12 +11,11 @@ const Home = () => {
           <source src={backgroundVideo} type="video/mp4" />
         </video>
         <div className="hero-content">
-          <h1>مرحباً بكم في عالم الديكورات الفاخرة</h1>
-          <p>
-            نحن نقدم أفضل خدمات التصميم الداخلي والديكورات المنزلية 
-            بأعلى معايير الجودة والأناقة العصرية
+          <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">ديكورات فاخرة ... تفاصيل تصنع الفرق</h1>
+          <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+          نصمم وننفذ حلول ديكور متكاملة ومبتكرة تمزج بين الحداثة والفخامة، لتجعل منزلك مساحة استثنائية مليئة بالأناقة والراحة. نحن نهتم بأدق التفاصيل لنخلق بيئة تعكس ذوقك الخاص وتلبي احتياجاتك.
           </p>
-          <div className="hero-buttons">
+          <div className="hero-buttons" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
             <Link to="/about" className="btn btn-large hero-find-btn">
               اكتشف المزيد
             </Link>

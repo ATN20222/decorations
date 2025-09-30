@@ -5,11 +5,21 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import './App.css'
 import Home from './pages/Home/Home'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
+import LoadingOverlay from './components/LoadingOverlay'
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    AOS.init({startEvent: 'DOMContentLoaded'});
+    AOS.refreshHard();
+  }, [])
   return (
     <Router>
       <div className="App">
+        <LoadingOverlay />
         <Header />
         <main>
           <Routes>
