@@ -37,7 +37,10 @@ const Header = () => {
   }, [isMenuOpen])
 
   return (
-    <header className={`navbar ${location.pathname !== '/' ? 'nav-c' : '' } ${isScrolled ? 'is-scrolled' : ''}`} 
+    <header className={`navbar 
+      {(location.pathname !== '/' && location.pathname !== '/about') ? 'nav-c' : '' }
+      ${isScrolled ? 'is-scrolled' : ''}
+      `} 
     data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"
     >
       <div className="navbar-content">
