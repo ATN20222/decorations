@@ -120,7 +120,7 @@ a:hover {
   text-align: center;
   text-decoration: none;
   border: none;
-  border-radius: 8px;
+  border-radius:50px;
   cursor: pointer;
   transition: all var(--transition-normal);
   background-color: var(--primary-color);

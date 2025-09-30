@@ -6,6 +6,7 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="hero">
+        
         <video className="hero-video" autoPlay muted loop playsInline>
           <source src={backgroundVideo} type="video/mp4" />
         </video>
