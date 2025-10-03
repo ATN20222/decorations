@@ -2,13 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import About from './pages/About/About'
-import Contact from './pages/Contact'
 import './App.css'
 import Home from './pages/Home/Home'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from 'react'
 import LoadingOverlay from './components/LoadingOverlay'
+import Contact from './pages/Contact/Contact'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
       <div className="App">
         <LoadingOverlay />
         <Header />
+        <ScrollToTop />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />

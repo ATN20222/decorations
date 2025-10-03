@@ -172,7 +172,7 @@ const Home = () => {
             اكتشف كيف حوّلنا أفكار عملائنا إلى واقع ينبض بالجمال والإبداع.<br />
             تصفح معرض مشاريعنا واستلهم تصميم منزلك أو مكتبك القادم!
           </p>
-          <Link to="/contact" className="btn btn-large watch-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+          <Link to="/about" className="btn btn-large watch-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
             شاهد نماذج أعمالنا الآن
           </Link>
         </div>

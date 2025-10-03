@@ -210,7 +210,7 @@ main {
 
 /* Contact Form */
 .contact-form {
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: 0 auto;
   background-color: var(--white);
   padding: var(--spacing-2xl);
@@ -221,7 +221,9 @@ main {
 .form-group {
   margin-bottom: var(--spacing-lg);
 }
-
+a{
+  transition: all var(--transition-normal) !important;
+}
 .form-group label {
   display: block;
   margin-bottom: var(--spacing-sm);

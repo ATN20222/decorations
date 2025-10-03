@@ -27,8 +27,8 @@ const Footer = () => {
           <div className="footer-contact">
             {/* <h4 className="footer-heading">تواصل</h4> */}
             <ul className="footer-contact-list" dir="rtl">
-              <li className="footer-contact-item"><img src={locationIcon} alt="location" width="30px" /> الرياض، المملكة العربية السعودية</li>
-              <li className="footer-contact-item"><img src={phoneIcon} alt="phone" width="30px" /> الهاتف: 55792622</li>
+              <li className="footer-contact-item"><img src={locationIcon} alt="location" width="30px" /> الكويت، الكويت</li>
+              <li className="footer-contact-item"><img src={phoneIcon} alt="phone" width="30px" /> الهاتف: 96555792622 <span>+</span></li>
               {/* <li className="footer-contact-item">البريد: decorations.arab@gmail.com</li> */}
             </ul>
           </div>
@@ -36,7 +36,7 @@ const Footer = () => {
 
         {/* Bottom: legal */}
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} شركة الديكورات المتميزة. جميع الحقوق محفوظة.</p>
+          <p>&copy; {new Date().getFullYear()}  ديكورات الكويت . جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
