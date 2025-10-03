@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 import LoadingOverlay from './components/LoadingOverlay'
 import Contact from './pages/Contact/Contact'
 import ScrollToTop from './components/ScrollToTop'
-
+import { SpeedInsights } from "@vercel/speed-insights/react"
 function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,6 +20,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+      <SpeedInsights/>
         <LoadingOverlay />
         <Header />
         <ScrollToTop />
