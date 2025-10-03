@@ -77,10 +77,14 @@ main {
   transition: all 0.3s ease-in-out;
 }
 /* Frosted/blurred header on scroll */
-.navbar.is-scrolled .navbar-content{
-  background:rgba(255, 255, 255, 0.63);
-  backdrop-filter: blur(10px) saturate(130%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
+.navbar.is-scrolled .navbar-content {
+  background: rgba(255, 255, 255, 0.63);
+  /* Use both backdrop-filter and -webkit-backdrop-filter for cross-browser support */
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  backdrop-filter: blur(10px) saturate(130%);
+  /* Fallback for browsers that do not support backdrop-filter */
+  /* If backdrop-filter is not supported, fallback to a more opaque background */
+  /* background: rgba(255, 255, 255, 0.95); */
   border-bottom: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 6px 24px rgba(16, 24, 40, 0.06);
 }
