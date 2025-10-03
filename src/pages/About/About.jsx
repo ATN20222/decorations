@@ -1,6 +1,7 @@
 import './About.css'
 import logo from '../../assets/Logo-Decoration.svg'
 import { lazy, Suspense } from 'react'
+import Seo from '../../components/Seo'
 import v1 from '../../assets/videos/VID-20250930-WA0001.mp4'
 import v2 from '../../assets/videos/VID-20250930-WA0002.mp4'
 import v3 from '../../assets/videos/VID-20250930-WA003.mp4'
@@ -19,6 +20,7 @@ const ProjectsGallery = lazy(() => import('../../components/ProjectsGallery'))
 const About = () => {
   return (
     <div className="about-page">
+      <Seo title="من نحن | شركة ديكورات الكويت" description="تعرف على رؤيتنا، قيمنا الأساسية، وفريقنا في شركة ديكورات الكويت الرائدة في التصميم الداخلي والديكورات." />
       {/* Page Header */}
       <section className="section about-page-header" data-aos="fade-down" data-aos-duration="800">
         <div className="text-center">

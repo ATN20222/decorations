@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Contact.css'
+import Seo from '../../components/Seo'
 import locationIcon from '../../assets/icons/location.svg'
 import phoneIcon from '../../assets/icons/phone.svg'
 import instagramIcon from '../../assets/icons/instagram.svg'
@@ -47,6 +48,7 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
+      <Seo title="اتصل بنا | شركة ديكورات الكويت" description="تواصل مع شركة ديكورات الكويت للاستشارات ومواعيد التصميم والتنفيذ في الكويت." />
       {/* Page Header */}
 
       <section className="section about-page-header contact-hero" data-aos="fade-down" data-aos-duration="800">

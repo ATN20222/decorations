@@ -65,7 +65,7 @@ function generateEmailHTML({ name, email, phone, subject, message }) {
           <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;background:#ffffff;border-radius:16px;box-shadow:0 10px 24px rgba(16,24,40,0.08);overflow:hidden;border:1px solid rgba(40,44,73,0.06);">
             <tr>
               <td style="padding:0">
-                <div style="height:6px;background:linear-gradient(90deg, ${primary}, ${secondary}, ${accent});"></div>
+                <div style="height:6px;background: ${primary};"></div>
               </td>
             </tr>
             <tr>

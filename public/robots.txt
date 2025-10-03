@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow build tool artifacts
+Disallow: /node_modules/
+Disallow: /vite.svg
+
+Sitemap: https://decorations-kuwait.com/sitemap.xml
+
+

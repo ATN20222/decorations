@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Seo from '../../components/Seo'
 import './Home.css'
 import backgroundVideo from '../../assets/BackgroundVideo.mp4'
 import service1 from '../../assets/services1.jpg'
@@ -11,6 +12,7 @@ import qualityIcon from '../../assets/icons/quality.svg'
 const Home = () => {
   return (
     <>
+      <Seo title="ديكورات الكويت | تصميم داخلي وديكور فاخر" description="شركة ديكورات الكويت: تصميم داخلي حديث، تنفيذ ديكورات فاخرة، اختيار مفروشات، وتجديد مساحات بأسلوب راقٍ في الكويت." />
       {/* Hero Section */}
       <section className="hero">
         
