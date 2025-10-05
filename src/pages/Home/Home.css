@@ -168,6 +168,10 @@
     font-size: var(--font-size-2xl);
     color: var(--white);
   }
+  .feature-icon img{
+    width: 40px;
+    height: 40px;
+  }
   
   .feature-card h3 {
     color: var(--dark-brown);
