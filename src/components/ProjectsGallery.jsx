@@ -3,8 +3,8 @@ import { createPortal } from 'react-dom'
 
 const isSafari = typeof navigator !== 'undefined' && /AppleWebKit\//.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent)
 
-const primeSafariThumb = (videoEl) => {
-  if (!isSafari || !videoEl) return
+const primeThumbAtOneSecond = (videoEl) => {
+  if (!videoEl) return
   const stopAt = 1.0
   const onTimeUpdate = () => {
     if (videoEl.currentTime >= stopAt) {
@@ -74,7 +74,7 @@ const VideoCard = ({ item, index, onOpen }) => {
           playsInline
           webkit-playsinline="true"
           onLoadedMetadata={() => setIsReady(true)}
-          onLoadedData={() => primeSafariThumb(videoRef.current)}
+          onLoadedData={() => primeThumbAtOneSecond(videoRef.current)}
         />
         <div className="video-overlay">
           <button className="video-play-button" aria-label="تشغيل الفيديو" onClick={() => onOpen(index)}>

@@ -4,8 +4,8 @@ import './Gallery.css'
 import { Link } from 'react-router-dom'
 const isSafari = typeof navigator !== 'undefined' && /AppleWebKit\//.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent)
 
-const primeSafariThumb = (videoEl) => {
-  if (!isSafari || !videoEl) return
+const primeThumbAtOneSecond = (videoEl) => {
+  if (!videoEl) return
   const stopAt = 1.0
   const onTimeUpdate = () => {
     if (videoEl.currentTime >= stopAt) {
@@ -65,7 +65,7 @@ const LazyGalleryItem = ({ load, alt, onOpen, index, type }) => {
             muted
             playsInline
             webkit-playsinline="true"
-            onLoadedData={(e) => primeSafariThumb(e.currentTarget)}
+            onLoadedData={(e) => primeThumbAtOneSecond(e.currentTarget)}
           />
         ) : (
           <img src={src} alt={alt} loading="lazy" decoding="async" />
