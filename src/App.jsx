@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import About from './pages/About/About'
 import './App.css'
+import Gallery from './pages/Gallery/Gallery'
 import Home from './pages/Home/Home'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/gallery" element={<Gallery />} />
           </Routes>
         </main>
         <Footer />

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 
 const createObserver = (onIntersect) => {
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return null
@@ -78,16 +79,25 @@ const VideoLightbox = ({ openIndex, items, onClose }) => {
     }
   }, [openIndex, items])
 
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (openIndex === null) return
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = originalOverflow }
+  }, [openIndex])
+
   if (openIndex === null) return null
 
-  return (
+  return createPortal(
     <div className="video-lightbox" role="dialog" aria-modal="true">
       <div className="lightbox-backdrop" onClick={onClose} />
       <div className="lightbox-content">
         <button className="lightbox-close" aria-label="إغلاق" onClick={onClose}>×</button>
         <video ref={videoEl} className="lightbox-video" controls playsInline />
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

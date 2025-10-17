@@ -48,6 +48,15 @@ const MobileSideMenu = ({ isOpen, onClose, currentPath }) => {
                 اتصل بنا
               </Link>
             </li>
+            <li>
+              <Link
+                to="/gallery"
+                className={`nav-link ${currentPath === '/gallery' ? 'active' : ''}`}
+                onClick={onClose}
+              >
+                معرض الأعمال
+              </Link>
+            </li>
           </ul>
         </nav>
       </aside>

@@ -61,6 +61,15 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <Link 
+                to="/gallery" 
+                className={`nav-link ${location.pathname === '/gallery' ? 'active' : ''}`}
+                onClick={closeMenu}
+              >
+                معرض الأعمال
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link 
                 to="/about" 
                 className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}
                 onClick={closeMenu}
@@ -77,6 +86,7 @@ const Header = () => {
                 اتصل بنا
               </Link>
             </li>
+
           </ul>
         </nav>
         

@@ -1,13 +1,24 @@
 import { Link } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 import Seo from '../../components/Seo'
 import './Home.css'
-import backgroundVideo from '../../assets/BackgroundVideo.mp4'
+import backgroundVideo from '../../assets/BackgroundVideo2.mp4'
 import service1 from '../../assets/services1.jpg'
 import service2 from '../../assets/mafroshat.jpg'
 import service3 from '../../assets/developement.jpg'
 import homeIcon from '../../assets/icons/home.svg'
 import designIcon from '../../assets/icons/design.svg'
 import qualityIcon from '../../assets/icons/quality.svg'
+import v1 from '../../assets/videos/VID-20250930-WA0001.mp4'
+import v2 from '../../assets/videos/VID-20250930-WA0002.mp4'
+import v3 from '../../assets/videos/VID-20250930-WA003.mp4'
+import v4 from '../../assets/videos/VID-20250930-WA004.mp4'
+import v5 from '../../assets/videos/VID-20250930-WA005.mp4'
+import v6 from '../../assets/videos/VID-20250930-WA006.mp4'
+
+
+
+const ProjectsGallery = lazy(() => import('../../components/ProjectsGallery'))
 
 const Home = () => {
   return (
@@ -166,19 +177,39 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="section bg-light">
-        <div className="container text-center">
+      {/* Projects Section */}
+      <section className="section" data-aos="fade-up" data-aos-duration="800" id="projects">
+        <div className="container">
+          <div className="section-title">
           <h2 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">شاهد أعمالنا المميزة</h2>
           <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" className="mb-4">
             اكتشف كيف حوّلنا أفكار عملائنا إلى واقع ينبض بالجمال والإبداع.<br />
             تصفح معرض مشاريعنا واستلهم تصميم منزلك أو مكتبك القادم!
-          </p>
-          <Link to="/about" className="btn btn-large watch-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-            شاهد نماذج أعمالنا الآن
+          </p>          </div>
+          <Suspense fallback={<div className="projects-gallery"><div className="projects-grid"><div className="video-card" style={{height:'220px'}} /></div></div>}>
+            <ProjectsGallery
+              items={[
+                { src: v1 },
+                { src: v2 },
+                { src: v3 },
+                { src: v4 },
+                { src: v5 },
+                { src: v6 },
+              ]}
+            />
+          </Suspense>
+        </div>
+        <div className="show-more-projects" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <Link to="/gallery" className="btn btn-large">
+            شاهد المزيد من المشاريع
           </Link>
+          <a href="https://www.instagram.com/decoration.kuwait?r=nametag" target="_blank" rel="noopener" className="btn btn-secondary btn-large">
+            شاهد أكثر على انستغرام
+          </a>
         </div>
       </section>
+
+      {/* Call to Action */}
     </>
   )
 }

@@ -1,21 +1,10 @@
 import './About.css'
 import logo from '../../assets/Logo-Decoration.svg'
-import { lazy, Suspense } from 'react'
 import Seo from '../../components/Seo'
-import v1 from '../../assets/videos/VID-20250930-WA0001.mp4'
-import v2 from '../../assets/videos/VID-20250930-WA0002.mp4'
-import v3 from '../../assets/videos/VID-20250930-WA003.mp4'
-import v4 from '../../assets/videos/VID-20250930-WA004.mp4'
-import v5 from '../../assets/videos/VID-20250930-WA005.mp4'
-import v6 from '../../assets/videos/VID-20250930-WA006.mp4'
-
 import medal from '../../assets/icons/medal.svg'
 import handshake from '../../assets/icons/handshake.svg'
 import idea from '../../assets/icons/lightbulb.svg'
 import star from '../../assets/icons/star.svg'
-import { Link } from 'react-router-dom'
-
-const ProjectsGallery = lazy(() => import('../../components/ProjectsGallery'))
 
 const About = () => {
   return (
@@ -123,32 +112,6 @@ const About = () => {
         
       </section>
 
-      {/* Projects */}
-      <section className="section " data-aos="fade-up" data-aos-duration="800" id="projects">
-        <div className="container">
-          <div className="section-title">
-            <h2>مشاريعنا</h2>
-          </div>
-          <Suspense fallback={<div className="projects-gallery"><div className="projects-grid"><div className="video-card" style={{height:'220px'}} /></div></div>}>
-            <ProjectsGallery
-              items={[
-                { src: v1 },
-                { src: v2 },
-                { src: v3 },
-                { src: v4 },
-                { src: v5 },
-                { src: v6 },
-
-              ]}
-            />
-          </Suspense>
-        </div>
-        <div className="show-more-projects" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-          <Link to="https://www.instagram.com/decoration.kuwait?r=nametag" target="_blank"  className="btn btn-large">
-            شاهد المزيد من المشاريع
-          </Link>
-        </div>
-      </section>
 
      
     </div>
