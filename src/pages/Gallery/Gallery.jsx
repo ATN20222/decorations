@@ -4,6 +4,26 @@ import './Gallery.css'
 import { Link } from 'react-router-dom'
 const isSafari = typeof navigator !== 'undefined' && /AppleWebKit\//.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent)
 
+const primeSafariThumb = (videoEl) => {
+  if (!isSafari || !videoEl) return
+  const stopAt = 1.0
+  const onTimeUpdate = () => {
+    if (videoEl.currentTime >= stopAt) {
+      videoEl.pause()
+      videoEl.currentTime = stopAt
+      videoEl.removeEventListener('timeupdate', onTimeUpdate)
+    }
+  }
+  const playPromise = videoEl.play()
+  if (playPromise && typeof playPromise.then === 'function') {
+    playPromise.then(() => {
+      videoEl.addEventListener('timeupdate', onTimeUpdate)
+    }).catch(() => {})
+  } else {
+    videoEl.addEventListener('timeupdate', onTimeUpdate)
+  }
+}
+
 // Glob import of gallery images and videos without eagerly bundling them
 const imageLoaders = import.meta.glob('../../assets/GalleryImages/*.{png,jpg,jpeg,webp}', { eager: false })
 const videoLoaders = import.meta.glob('../../assets/videos/*.{mp4,webm,ogg}', { eager: false })
@@ -45,28 +65,7 @@ const LazyGalleryItem = ({ load, alt, onOpen, index, type }) => {
             muted
             playsInline
             webkit-playsinline="true"
-            onLoadedData={(e) => {
-              if (!isSafari) return
-              const videoEl = e.currentTarget
-              try {
-                if (!videoEl.videoWidth || !videoEl.videoHeight) return
-                const canvas = document.createElement('canvas')
-                canvas.width = videoEl.videoWidth
-                canvas.height = videoEl.videoHeight
-                const onSeeked = () => {
-                  const ctx = canvas.getContext('2d')
-                  if (!ctx) return
-                  ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height)
-                  const dataUrl = canvas.toDataURL('image/jpeg', 0.6)
-                  videoEl.setAttribute('poster', dataUrl)
-                  videoEl.currentTime = 0
-                  videoEl.pause()
-                  videoEl.removeEventListener('seeked', onSeeked)
-                }
-                videoEl.addEventListener('seeked', onSeeked)
-                videoEl.currentTime = 0.05
-              } catch (_) {}
-            }}
+            onLoadedData={(e) => primeSafariThumb(e.currentTarget)}
           />
         ) : (
           <img src={src} alt={alt} loading="lazy" decoding="async" />

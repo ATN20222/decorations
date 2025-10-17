@@ -3,26 +3,25 @@ import { createPortal } from 'react-dom'
 
 const isSafari = typeof navigator !== 'undefined' && /AppleWebKit\//.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent)
 
-const generateSafariPoster = (videoEl) => {
+const primeSafariThumb = (videoEl) => {
   if (!isSafari || !videoEl) return
-  if (!videoEl.videoWidth || !videoEl.videoHeight) return
-  try {
-    const canvas = document.createElement('canvas')
-    canvas.width = videoEl.videoWidth
-    canvas.height = videoEl.videoHeight
-    const onSeeked = () => {
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-      ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height)
-      const dataUrl = canvas.toDataURL('image/jpeg', 0.6)
-      videoEl.setAttribute('poster', dataUrl)
-      videoEl.currentTime = 0
+  const stopAt = 1.0
+  const onTimeUpdate = () => {
+    if (videoEl.currentTime >= stopAt) {
       videoEl.pause()
-      videoEl.removeEventListener('seeked', onSeeked)
+      videoEl.currentTime = stopAt
+      videoEl.removeEventListener('timeupdate', onTimeUpdate)
     }
-    videoEl.addEventListener('seeked', onSeeked)
-    videoEl.currentTime = 0.05
-  } catch (_) {}
+  }
+  // Try to play muted inline, then pause at 1s
+  const playPromise = videoEl.play()
+  if (playPromise && typeof playPromise.then === 'function') {
+    playPromise.then(() => {
+      videoEl.addEventListener('timeupdate', onTimeUpdate)
+    }).catch(() => {})
+  } else {
+    videoEl.addEventListener('timeupdate', onTimeUpdate)
+  }
 }
 
 const createObserver = (onIntersect) => {
@@ -75,7 +74,7 @@ const VideoCard = ({ item, index, onOpen }) => {
           playsInline
           webkit-playsinline="true"
           onLoadedMetadata={() => setIsReady(true)}
-          onLoadedData={() => generateSafariPoster(videoRef.current)}
+          onLoadedData={() => primeSafariThumb(videoRef.current)}
         />
         <div className="video-overlay">
           <button className="video-play-button" aria-label="تشغيل الفيديو" onClick={() => onOpen(index)}>
