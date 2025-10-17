@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import Seo from '../../components/Seo'
 import './Gallery.css'
 import { Link } from 'react-router-dom'
+const isSafari = typeof navigator !== 'undefined' && /AppleWebKit\//.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent)
 
 // Glob import of gallery images and videos without eagerly bundling them
 const imageLoaders = import.meta.glob('../../assets/GalleryImages/*.{png,jpg,jpeg,webp}', { eager: false })
@@ -37,7 +38,36 @@ const LazyGalleryItem = ({ load, alt, onOpen, index, type }) => {
     <figure className="gallery-item" ref={ref} onClick={() => onOpen(index)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') onOpen(index) }}>
       {src ? (
         type === 'video' ? (
-          <video className="gallery-video" src={src} preload="metadata" muted playsInline />
+          <video
+            className="gallery-video"
+            src={src}
+            preload="metadata"
+            muted
+            playsInline
+            webkit-playsinline="true"
+            onLoadedData={(e) => {
+              if (!isSafari) return
+              const videoEl = e.currentTarget
+              try {
+                if (!videoEl.videoWidth || !videoEl.videoHeight) return
+                const canvas = document.createElement('canvas')
+                canvas.width = videoEl.videoWidth
+                canvas.height = videoEl.videoHeight
+                const onSeeked = () => {
+                  const ctx = canvas.getContext('2d')
+                  if (!ctx) return
+                  ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height)
+                  const dataUrl = canvas.toDataURL('image/jpeg', 0.6)
+                  videoEl.setAttribute('poster', dataUrl)
+                  videoEl.currentTime = 0
+                  videoEl.pause()
+                  videoEl.removeEventListener('seeked', onSeeked)
+                }
+                videoEl.addEventListener('seeked', onSeeked)
+                videoEl.currentTime = 0.05
+              } catch (_) {}
+            }}
+          />
         ) : (
           <img src={src} alt={alt} loading="lazy" decoding="async" />
         )
@@ -74,7 +104,15 @@ const ImageLightbox = ({ openIndex, items, onClose }) => {
       <div className="lightbox-content">
         <button className="lightbox-close" aria-label="إغلاق" onClick={onClose}>×</button>
         {current.type === 'video' ? (
-          <video src={current.src} className="lightbox-video" controls playsInline autoPlay />
+          <video
+            src={current.src}
+            className="lightbox-video"
+            controls
+            preload="metadata"
+            playsInline
+            webkit-playsinline="true"
+            autoPlay
+          />
         ) : (
           <img src={current.src} alt={current.alt} className="lightbox-image" />
         )}

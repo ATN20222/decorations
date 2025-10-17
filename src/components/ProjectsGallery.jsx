@@ -1,6 +1,30 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 
+const isSafari = typeof navigator !== 'undefined' && /AppleWebKit\//.test(navigator.userAgent) && /Safari\//.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent)
+
+const generateSafariPoster = (videoEl) => {
+  if (!isSafari || !videoEl) return
+  if (!videoEl.videoWidth || !videoEl.videoHeight) return
+  try {
+    const canvas = document.createElement('canvas')
+    canvas.width = videoEl.videoWidth
+    canvas.height = videoEl.videoHeight
+    const onSeeked = () => {
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+      ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height)
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.6)
+      videoEl.setAttribute('poster', dataUrl)
+      videoEl.currentTime = 0
+      videoEl.pause()
+      videoEl.removeEventListener('seeked', onSeeked)
+    }
+    videoEl.addEventListener('seeked', onSeeked)
+    videoEl.currentTime = 0.05
+  } catch (_) {}
+}
+
 const createObserver = (onIntersect) => {
   if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return null
   return new IntersectionObserver((entries) => {
@@ -49,7 +73,9 @@ const VideoCard = ({ item, index, onOpen }) => {
           preload="metadata"
           muted
           playsInline
+          webkit-playsinline="true"
           onLoadedMetadata={() => setIsReady(true)}
+          onLoadedData={() => generateSafariPoster(videoRef.current)}
         />
         <div className="video-overlay">
           <button className="video-play-button" aria-label="تشغيل الفيديو" onClick={() => onOpen(index)}>
@@ -94,7 +120,14 @@ const VideoLightbox = ({ openIndex, items, onClose }) => {
       <div className="lightbox-backdrop" onClick={onClose} />
       <div className="lightbox-content">
         <button className="lightbox-close" aria-label="إغلاق" onClick={onClose}>×</button>
-        <video ref={videoEl} className="lightbox-video" controls playsInline />
+        <video
+          ref={videoEl}
+          className="lightbox-video"
+          controls
+          preload="metadata"
+          playsInline
+          webkit-playsinline="true"
+        />
       </div>
     </div>,
     document.body

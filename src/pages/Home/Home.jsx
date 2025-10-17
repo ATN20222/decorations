@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react'
 import Seo from '../../components/Seo'
 import './Home.css'
 import backgroundVideo from '../../assets/BackgroundVideo2.mp4'
+import { useEffect, useRef } from 'react'
 import service1 from '../../assets/services1.jpg'
 import service2 from '../../assets/mafroshat.jpg'
 import service3 from '../../assets/developement.jpg'
@@ -27,7 +28,17 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero">
         
-        <video className="hero-video" autoPlay muted loop playsInline>
+        <video className="hero-video" autoPlay muted loop playsInline webkit-playsinline="true" preload="metadata"
+          ref={el => {
+            if (!el) return
+            el.style.opacity = '0'
+            const onReady = () => {
+              el.style.transition = 'opacity 400ms ease'
+              el.style.opacity = '1'
+            }
+            el.addEventListener('loadeddata', onReady, { once: true })
+          }}
+        >
           <source src={backgroundVideo} type="video/mp4" />
         </video>
         <div className="hero-content">
