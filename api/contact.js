@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     const html = generateEmailHTML({ name, email, phone, subject, message })
 
     await resend.emails.send({
-      from: 'Decorations <onboarding@resend.dev>',
+      from: 'Decorations <ado@resend.dev>',
       to: ['antonabdalla30@gmail.com'],
       subject: `اتصال جديد: ${subject}`,
       reply_to: email,
